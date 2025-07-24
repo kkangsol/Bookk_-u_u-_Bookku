@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+	<persistence-unit name="dbinfo">
+
+		<properties>
+			<!-- MySQL 드라이버 -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			
+			<!-- MySQL 연결 URL (예: localhost:3306/bookProject) -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookProject?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
+
+			<!-- 사용자 계정 -->
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+
+			<!-- Hibernate 방언: MySQL -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+
+			<!-- SQL 로그 출력 -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- SQL 포맷팅 -->
+			<property name="hibernate.format_sql" value="true" />
+
+			<!-- DDL 자동 실행 옵션 -->
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+		</properties>
+	</persistence-unit>
+</persistence>
