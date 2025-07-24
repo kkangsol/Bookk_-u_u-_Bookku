@@ -1,5 +1,6 @@
 package model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,5 +31,6 @@ public class book {
 	private int year;
 	private String description;
 	private boolean loaned;
+	@Column(name="image_path")
 	private String url;
 }
