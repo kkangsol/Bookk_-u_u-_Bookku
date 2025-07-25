@@ -17,8 +17,7 @@ import model.entity.Books;
 @WebServlet("/bookSearch")
 public class SearchVarController extends HttpServlet {
 	
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String category = request.getParameter("category");
         String query = request.getParameter("query");
@@ -34,9 +33,9 @@ public class SearchVarController extends HttpServlet {
         
         searchMap.put("title", t -> {
 			try {
-				return dao.findTitle(t);
+				return dao.findTitle(t);   //데이터  or 예외
 			} catch (SQLException e) {
-				e.printStackTrace();
+				response.sendRedirect("/failview.jsp");   
 			}
 			return null;
 		});
@@ -45,7 +44,7 @@ public class SearchVarController extends HttpServlet {
 			try {
 				return dao.findAuthor(t);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				response.sendRedirect("/failview.jsp");   
 			}
 			return null;
 		});
@@ -54,7 +53,7 @@ public class SearchVarController extends HttpServlet {
 			try {
 				return dao.findCategory(t);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				response.sendRedirect("/failview.jsp");   
 			}
 			return null;
 		});

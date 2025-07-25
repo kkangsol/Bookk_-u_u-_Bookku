@@ -40,7 +40,8 @@ public class InsertBookController extends HttpServlet {
         try {
 			dao.insertBook(book);
 		} catch (SQLException e) {
-			response.sendRedirect("/failview.jsp");
+			response.sendRedirect("/failview.jsp");   
+			return;
 		}
         
         request.setAttribute("title", book.getTitle());

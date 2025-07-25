@@ -25,7 +25,8 @@ public class ResultBookController extends HttpServlet {
 		try {
 			bookList = dao.findTitle(request.getParameter("title"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			response.sendRedirect("/failview.jsp");   
+			return;
 		}
 
         request.setAttribute("bookList", bookList);

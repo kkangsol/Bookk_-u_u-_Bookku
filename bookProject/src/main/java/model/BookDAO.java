@@ -8,9 +8,9 @@ import java.util.List;
 
 public class BookDAO {
 	
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbinfo");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbinfo");  //??
 
-    public List<Books> findAll() {
+    public List<Books> findAll()  {
     	
         EntityManager em = emf.createEntityManager();
         List<Books> list = null;
@@ -19,6 +19,7 @@ public class BookDAO {
             list = em.createQuery("SELECT b FROM book b", Books.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         } finally {
             em.close();
         }
@@ -26,6 +27,7 @@ public class BookDAO {
         return list;
         
     }
+    
     
     public List<Books> findTitle(String title) throws SQLException {
     	
@@ -45,6 +47,7 @@ public class BookDAO {
         
     }
     
+    
     public List<Books> findCategory(String category) throws SQLException{
     	
     	EntityManager em = emf.createEntityManager();
@@ -61,6 +64,7 @@ public class BookDAO {
         return list;
         
     }
+    
     
     public List<Books> findAuthor(String author) throws SQLException{
     	

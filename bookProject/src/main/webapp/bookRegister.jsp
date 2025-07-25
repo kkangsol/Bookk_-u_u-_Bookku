@@ -160,10 +160,13 @@ form.register-form {
 			
 			<div class="register-actions">
 				<button type="submit">등록</button>
+				
+				<%-- ????? --%>
 				<% String regResult = (String)request.getAttribute("regResult");
            			if("success".equals(regResult)){ %>
 				<span class="success-check">&#10003;</span>
 				<% } %>
+				
 			</div>
 			
 		</form>

@@ -103,6 +103,7 @@
   </a>
 </div>
 
+<%-- ????? 변수명 소문자 권장 --%>
 <c:forEach var="Books" items="${bookList}">
   <div class="book-card">
     <img src="${Books.url}" alt="도서 이미지" class="book-image">
