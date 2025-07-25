@@ -84,6 +84,24 @@
 
 <h2>📚 도서 목록</h2>
 
+<div style="text-align: center; margin-bottom: 40px;">
+  <a href="/bookProject/index.html">
+    <button style="
+      background-color: #fbcfe8;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Gowun Dodum', sans-serif;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s ease, transform 0.2s ease;">
+      🏠 홈으로 돌아가기
+    </button>
+  </a>
+</div>
+
 <c:forEach var="book" items="${bookList}">
   <div class="book-card">
     <img src="${book.url}" alt="도서 이미지" class="book-image">
