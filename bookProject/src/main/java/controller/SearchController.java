@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -17,10 +18,30 @@ public class SearchController extends HttpServlet {
             throws ServletException, IOException {
 
         String category = request.getParameter("category");
-        String yearStr = request.getParameter("year");
+        String query = request.getParameter("query");
 
         BookDAO dao = new BookDAO();
-        List<book> filteredList = dao.searchBooks(category, yearStr);
+        List<book> filteredList = null;
+        
+        try {
+	        switch(category) {
+	        	case "title":
+	        		filteredList = dao.findTitle(query);
+	        		break;
+	        	case "author":
+	        		filteredList = dao.findAuthor(query);
+	        		break;
+	        	case "category":
+	        		filteredList = dao.findCategory(query);
+	        		break;
+	        	default:
+	        		filteredList = dao.findAll();
+	        		break;
+	        }
+        }catch(SQLException e){
+        	e.printStackTrace();
+        	response.sendRedirect("/failView.jsp");
+        }
 
         request.setAttribute("bookSearch", filteredList);
         request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);

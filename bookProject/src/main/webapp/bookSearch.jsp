@@ -79,10 +79,9 @@
         <h2>📚 도서 검색</h2>
 
         <!-- 검색 폼 -->
-        <form class="search-form" action="/bookProject/titleSearch" method="get">
+        <form class="search-form" action="/bookProject/bookSearch" method="get">
             <label for="category">검색</label>
             <select name="category" id="category">
-                <option value="">전체</option>
                 <option value="title">제목</option>
                 <option value="category">장르</option>
                 <option value="author">저자</option>
@@ -92,7 +91,7 @@
         </form>
 
         <!-- 검색 결과 -->
-        <c:if test="${not empty bookList}">
+        <c:if test="${not empty bookSearch}">
             <table>
                 <thead>
                     <tr>
@@ -101,16 +100,27 @@
                         <th>출판사</th>
                         <th>출판연도</th>
                         <th>장르</th>
+                        <th>대출가능여부</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="book" items="${bookList}">
+                    <c:forEach var="book" items="${bookSearch}">
                         <tr>
                             <td>${book.title}</td>
                             <td>${book.author}</td>
                             <td>${book.publisher}</td>
                             <td>${book.year}</td>
                             <td>${book.category}</td>
+                            <td>
+                            	<c:choose>
+                            		<c:when test="${book.loaned}">
+                            			불가
+                            		</c:when>
+                            		<c:otherwise>
+                            			가능
+                            		</c:otherwise>
+                            	</c:choose>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -118,7 +128,7 @@
         </c:if>
 
         <!-- 검색 결과 없을 때 -->
-        <c:if test="${empty bookList}">
+        <c:if test="${empty bookSearch}">
             <p class="no-result">검색 결과가 없습니다.</p>
         </c:if>
     </div>
