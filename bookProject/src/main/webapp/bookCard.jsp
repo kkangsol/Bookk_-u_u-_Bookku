@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,model.entity.Book" %>
+<%@ page import="java.util.*,model.entity.Books" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -102,19 +102,19 @@
   </a>
 </div>
 
-<c:forEach var="book" items="${bookList}">
+<c:forEach var="Books" items="${bookList}">
   <div class="book-card">
-    <img src="${book.url}" alt="도서 이미지" class="book-image">
+    <img src="${Books.url}" alt="도서 이미지" class="book-image">
     <div class="book-details">
-      <div class="book-title">${book.title}</div>
-      <div class="book-meta"><strong>저자:</strong> ${book.author}</div>
-      <div class="book-meta"><strong>출판사:</strong> ${book.publisher}</div>
-      <div class="book-meta"><strong>출판년도:</strong> ${book.year}</div>
+      <div class="book-title">${Books.title}</div>
+      <div class="book-meta"><strong>저자:</strong> ${Books.author}</div>
+      <div class="book-meta"><strong>출판사:</strong> ${Books.publisher}</div>
+      <div class="book-meta"><strong>출판년도:</strong> ${Books.year}</div>
       <div class="book-description">
         <strong>도서 설명:</strong><br>
         <c:choose>
-          <c:when test="${not empty book.description}">
-            ${book.description}
+          <c:when test="${not empty Books.description}">
+            ${Books.description}
           </c:when>
           <c:otherwise>
             <span class="no-description">(설명 없음)</span>

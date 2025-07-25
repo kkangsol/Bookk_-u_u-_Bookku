@@ -159,16 +159,16 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="book" items="${bookSearch}">
+          <c:forEach var="Books" items="${bookSearch}">
             <tr>
-              <td>${book.title}</td>
-              <td>${book.author}</td>
-              <td>${book.publisher}</td>
-              <td>${book.year}</td>
-              <td>${book.category}</td>
+              <td>${Books.title}</td>
+              <td>${Books.author}</td>
+              <td>${Books.publisher}</td>
+              <td>${Books.year}</td>
+              <td>${Books.category}</td>
               <td>
                 <c:choose>
-                  <c:when test="${book.loaned}">
+                  <c:when test="${Books.loaned}">
                     불가
                   </c:when>
                   <c:otherwise>
