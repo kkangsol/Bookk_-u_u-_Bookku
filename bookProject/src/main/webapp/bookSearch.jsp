@@ -82,7 +82,6 @@
         <form class="search-form" action="/bookProject/titleSearch" method="get">
             <label for="category">검색</label>
             <select name="category" id="category">
-                <option value="">전체</option>
                 <option value="title">제목</option>
                 <option value="category">장르</option>
                 <option value="author">저자</option>
