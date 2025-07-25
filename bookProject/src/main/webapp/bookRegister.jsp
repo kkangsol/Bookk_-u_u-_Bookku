@@ -101,7 +101,7 @@ body {
 <body>
 	<div class="container">
 		<!-- 등록 영역 -->
-		<form class="register-form" action="register" method="post">
+			<form action="registerBook" method="post">
 			<div class="register-row">
 				<label for="title">제목</label> <input type="text" id="title"
 					name="title" required> <label for="author">저자</label> <input
