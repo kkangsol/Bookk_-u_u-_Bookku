@@ -11,18 +11,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.BookDAO;
 import model.entity.book;
 
-@WebServlet("/bookList")
-public class Controller extends HttpServlet {
+@WebServlet("/bookSearch")
+public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        String category = request.getParameter("category");
+        String yearStr = request.getParameter("year");
+
         BookDAO dao = new BookDAO();
-        List<book> bookList = dao.findAll();
+        List<book> filteredList = dao.searchBooks(category, yearStr);
 
-        request.setAttribute("bookList", bookList);
-        request.getRequestDispatcher("/bookCard.jsp").forward(request, response);
-        
-
+        request.setAttribute("bookSearch", filteredList);
+        request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);
     }
 }
-
