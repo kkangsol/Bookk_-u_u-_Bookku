@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.BookDAO;
-import model.entity.book;
+import model.entity.Books;
 
 @WebServlet("/bookList")
 public class Controller extends HttpServlet {
@@ -17,7 +17,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         
         BookDAO dao = new BookDAO();
-        List<book> bookList = dao.findAll();
+        List<Books> bookList = dao.findAll();
 
         request.setAttribute("bookList", bookList);
         request.getRequestDispatcher("/bookCard.jsp").forward(request, response);

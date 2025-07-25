@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.BookDAO;
-import model.entity.book;
+import model.entity.Books;
 
 @WebServlet("/resultList")
 public class resultController extends HttpServlet {
@@ -18,7 +18,7 @@ public class resultController extends HttpServlet {
             throws ServletException, IOException {
         
         BookDAO dao = new BookDAO();
-        List<book> bookList = null;
+        List<Books> bookList = null;
 		try {
 			bookList = dao.findTitle(request.getParameter("title"));
 		} catch (SQLException e) {

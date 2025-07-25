@@ -1,6 +1,6 @@
 package controller;
 
-import model.entity.book;
+import model.entity.Books;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ public class insertController extends HttpServlet {
         request.setCharacterEncoding("UTF-8"); // 한글 깨짐 방지
         
         
-        book book = new book();
+        Books book = new Books();
         
         book.setTitle(request.getParameter("title"));
         book.setSubTitle(request.getParameter("subtitle"));

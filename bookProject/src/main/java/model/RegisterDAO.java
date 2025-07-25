@@ -7,12 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import model.entity.book;
+import model.entity.Books;
 import util.DBUtil;
 
 public class RegisterDAO {
 
-	public void insertBook(book book) {
+	public void insertBook(Books book) {
 
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.BookDAO;
-import model.entity.book;
+import model.entity.Books;
 
 @WebServlet("/bookSearch")
 public class SearchController extends HttpServlet {
@@ -21,7 +21,7 @@ public class SearchController extends HttpServlet {
         String query = request.getParameter("query");
 
         BookDAO dao = new BookDAO();
-        List<book> filteredList = null;
+        List<Books> filteredList = null;
         
         try {
 	        switch(category) {
