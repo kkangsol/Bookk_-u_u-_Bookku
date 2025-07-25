@@ -31,9 +31,12 @@ public class BookDAO {
         List<book> list = null;
 
         try {
-            list = em.createQuery("SELECT b FROM book b WHERE b.title = :title", book.class)
-                     .setParameter("title", title)
-                     .getResultList();
+            System.out.println("🔍 DAO findTitle 실행, 입력 title = [" + title + "]");
+            list = em.createQuery(
+                "SELECT b FROM book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))", book.class)
+                .setParameter("title", title)
+                .getResultList();
+            System.out.println("📚 검색 결과 수: " + list.size());
         } finally {
             em.close();
         }
@@ -46,7 +49,7 @@ public class BookDAO {
         List<book> list = null;
         
         try {
-        	list = em.createQuery("SELECT b FROM book b WHERE b.category = :category", book.class)
+        	list = em.createQuery("SELECT b FROM book b WHERE LOWER(b.category) LIKE LOWER(CONCAT('%', :category, '%'))", book.class)
         			.setParameter("category", category)
         			.getResultList();
         } finally {
@@ -61,8 +64,8 @@ public class BookDAO {
         List<book> list = null;
         
         try {
-        	list = em.createQuery("SELECT b FROM book b WHERE b.author = :author", book.class)
-        			.setParameter("category", author)
+        	list = em.createQuery("SELECT b FROM book b WHERE LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%'))", book.class)
+        			.setParameter("author", author)
         			.getResultList();
         } finally {
         	em.close();
