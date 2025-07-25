@@ -35,8 +35,10 @@ public class insertController extends HttpServlet {
 
         RegisterDAO dao = new RegisterDAO();
         dao.insertBook(book);
+        
+        request.setAttribute("title", book.getTitle());
+        request.getRequestDispatcher("/resultList").forward(request, response);
 
-        response.sendRedirect("bookList"); 
     }
 }
 
