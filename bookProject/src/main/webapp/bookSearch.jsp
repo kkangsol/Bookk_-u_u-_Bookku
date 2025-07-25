@@ -79,7 +79,7 @@
         <h2>📚 도서 검색</h2>
 
         <!-- 검색 폼 -->
-        <form class="search-form" action="/bookProject/bookSearch" method="get">
+        <form class="search-form" action="/bookProject/titleSearch" method="get">
             <label for="category">검색</label>
             <select name="category" id="category">
                 <option value="">전체</option>
@@ -92,7 +92,7 @@
         </form>
 
         <!-- 검색 결과 -->
-        <c:if test="${not empty bookSearch}">
+        <c:if test="${not empty bookList}">
             <table>
                 <thead>
                     <tr>
@@ -104,7 +104,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="book" items="${bookSearch}">
+                    <c:forEach var="book" items="${bookList}">
                         <tr>
                             <td>${book.title}</td>
                             <td>${book.author}</td>
@@ -118,7 +118,7 @@
         </c:if>
 
         <!-- 검색 결과 없을 때 -->
-        <c:if test="${empty bookSearch}">
+        <c:if test="${empty bookList}">
             <p class="no-result">검색 결과가 없습니다.</p>
         </c:if>
     </div>
