@@ -2,7 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,27 +22,45 @@ public class SearchController extends HttpServlet {
         String query = request.getParameter("query");
 
         BookDAO dao = new BookDAO();
-        List<Books> filteredList = null;
+
+        // 메서드가 예외를 던지지 않는다고 가정하고 간결한 람다만 사용
+        Map<String, Function<String, List<Books>>> searchMap = new HashMap<>();
         
-        try {
-	        switch(category) {
-	        	case "title":
-	        		filteredList = dao.findTitle(query);
-	        		break;
-	        	case "author":
-	        		filteredList = dao.findAuthor(query);
-	        		break;
-	        	case "category":
-	        		filteredList = dao.findCategory(query);
-	        		break;
-	        	default:
-	        		filteredList = dao.findAll();
-	        		break;
-	        }
-        }catch(SQLException e){
-        	e.printStackTrace();
-        	response.sendRedirect("/failView.jsp");
-        }
+//        searchMap.put("title", dao::findTitle);
+//        searchMap.put("author", dao::findAuthor);
+//        searchMap.put("category", dao::findCategory);
+        
+        searchMap.put("title", t -> {
+			try {
+				return dao.findTitle(t);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		});
+        searchMap.put("author", t -> {
+			try {
+				return dao.findAuthor(t);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		});
+        searchMap.put("category", t -> {
+			try {
+				return dao.findCategory(t);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		});
+
+        List<Books> filteredList = searchMap
+                .getOrDefault(category, k -> dao.findAll())
+                .apply(query);
 
         request.setAttribute("bookSearch", filteredList);
         request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);
