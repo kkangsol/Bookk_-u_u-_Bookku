@@ -12,9 +12,26 @@
       </plugin>
     </plugins>
   </build>
+  <properties>
+    	<maven.compiler.source>17</maven.compiler.source>
+    	<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+  
   
   <dependencies>
-
+		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+    		<groupId>jakarta.servlet</groupId>
+		    <artifactId>jakarta.servlet-api</artifactId>
+		    <version>5.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
+<!-- JSTL (Jakarta EE 9+ 기반) - Tomcat 10.1 이상 필수 설정 -->
+		<dependency>
+		  <groupId>jakarta.servlet.jsp.jstl</groupId>
+		  <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		  <version>2.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

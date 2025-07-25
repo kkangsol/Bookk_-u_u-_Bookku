@@ -10,8 +10,8 @@
 			<!-- MySQL 드라이버 -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			
-			<!-- MySQL 연결 URL (예: localhost:3306/bookDB) -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookDB?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
+			<!-- MySQL 연결 URL (예: localhost:3306/bookProject) -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookProject?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
 
 			<!-- 사용자 계정 -->
 			<property name="javax.persistence.jdbc.user" value="root" />
