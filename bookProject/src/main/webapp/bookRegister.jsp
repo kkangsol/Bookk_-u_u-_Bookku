@@ -125,38 +125,47 @@ form.register-form {
 </head>
 <body>
 	<div class="container">
+	
 		<div class="home-btn">
 			<a href="/bookProject/index.html">
 				<button>🏠 홈으로 돌아가기</button>
 			</a>
 		</div>
+		
 		<h2>📘 도서 등록</h2>
+		
 		<form action="registerBook" method="post" class="register-form">
+		
 			<div class="register-row">
 				<label for="title">제목</label> <input type="text" id="title"
 					name="title" required> <label for="author">저자</label> <input
 					type="text" id="author" name="author" required>
 			</div>
+			
 			<div class="register-row">
 				<label for="publisher">출판사</label> <input type="text" id="publisher"
 					name="publisher"> <label for="year">출판연도</label> <input
 					type="number" id="year" name="year" min="1900" max="2099"
 					value="<%= currentYear %>">
 			</div>
+			
 			<div class="register-row">
 				<label for="description">책소개</label>
 				<textarea id="description" name="description"></textarea>
 			</div>
+			
 			<div class="register-row">
 				<label for="url">URL</label> <input type="text" id="url" name="url">
 			</div>
+			
 			<div class="register-actions">
 				<button type="submit">등록</button>
 				<% String regResult = (String)request.getAttribute("regResult");
-           if("success".equals(regResult)){ %>
+           			if("success".equals(regResult)){ %>
 				<span class="success-check">&#10003;</span>
 				<% } %>
 			</div>
+			
 		</form>
 	</div>
 </body>

@@ -6,7 +6,9 @@ import javax.persistence.Persistence;
 import org.junit.Test;
 
 public class DBUtil {
+	
 	private static EntityManagerFactory emf;
+	
 	static {
 		emf = Persistence.createEntityManagerFactory("dbinfo");
 	}

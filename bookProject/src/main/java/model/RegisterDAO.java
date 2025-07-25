@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,20 +13,18 @@ import util.DBUtil;
 
 public class RegisterDAO {
 
-	public void insertBook(Books book) {
+	public void insertBook(Books book) throws SQLException {
 
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		try {
 			tx.begin();
-			em.persist(book); // 전달받은 book 객체 저장
+			em.persist(book);
 			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-			e.printStackTrace();
 		} finally {
 			em.close();
 		}
+		
 	}
 }

@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BookDAO {
+	
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbinfo");
 
     public List<Books> findAll() {
+    	
         EntityManager em = emf.createEntityManager();
         List<Books> list = null;
 
@@ -22,9 +24,11 @@ public class BookDAO {
         }
 
         return list;
+        
     }
     
     public List<Books> findTitle(String title) throws SQLException {
+    	
         EntityManager em = emf.createEntityManager();
         List<Books> list = null;
 
@@ -38,9 +42,11 @@ public class BookDAO {
         }
 
         return list;
+        
     }
     
     public List<Books> findCategory(String category) throws SQLException{
+    	
     	EntityManager em = emf.createEntityManager();
         List<Books> list = null;
         
@@ -53,9 +59,11 @@ public class BookDAO {
         }
         
         return list;
+        
     }
     
     public List<Books> findAuthor(String author) throws SQLException{
+    	
     	EntityManager em = emf.createEntityManager();
         List<Books> list = null;
         
@@ -68,6 +76,7 @@ public class BookDAO {
         }
         
         return list;
+        
     }
 
 }

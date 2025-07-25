@@ -10,11 +10,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import model.BookDAO;
 import model.entity.Books;
 
 @WebServlet("/bookSearch")
-public class SearchController extends HttpServlet {
+public class SearchVarController extends HttpServlet {
+	
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -34,25 +36,24 @@ public class SearchController extends HttpServlet {
 			try {
 				return dao.findTitle(t);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;
 		});
+        
         searchMap.put("author", t -> {
 			try {
 				return dao.findAuthor(t);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;
 		});
+        
         searchMap.put("category", t -> {
 			try {
 				return dao.findCategory(t);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;

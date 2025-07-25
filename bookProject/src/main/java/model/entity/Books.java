@@ -19,9 +19,11 @@ import lombok.ToString;
 @ToString
 @Entity(name = "book")
 public class Books {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String title;
 	private String subTitle;
 	private String category;

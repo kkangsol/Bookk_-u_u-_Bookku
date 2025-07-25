@@ -149,6 +149,7 @@
     <c:if test="${not empty bookSearch}">
       <table>
         <thead>
+        
           <tr>
             <th>제목</th>
             <th>저자</th>
@@ -157,6 +158,7 @@
             <th>장르</th>
             <th>대출 가능 여부</th>
           </tr>
+          
         </thead>
         <tbody>
           <c:forEach var="Books" items="${bookSearch}">

@@ -2,6 +2,7 @@ package controller;
 
 import model.entity.Books;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,13 +12,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.RegisterDAO;
 
 @WebServlet("/registerBook")
-public class insertController extends HttpServlet {
+public class InsertBookController extends HttpServlet {
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8"); // 한글 깨짐 방지
-        
         
         Books book = new Books();
         
@@ -28,13 +28,20 @@ public class insertController extends HttpServlet {
         book.setAuthor(request.getParameter("author"));
         book.setPublisher(request.getParameter("publisher"));
         String yearStr = request.getParameter("year");
+        
         if (yearStr != null && !yearStr.isEmpty()) {
             book.setYear(Integer.parseInt(yearStr));
         }
+        
         book.setDescription(request.getParameter("description"));
 
         RegisterDAO dao = new RegisterDAO();
-        dao.insertBook(book);
+        
+        try {
+			dao.insertBook(book);
+		} catch (SQLException e) {
+			response.sendRedirect("/failview.jsp");
+		}
         
         request.setAttribute("title", book.getTitle());
         request.getRequestDispatcher("/resultList").forward(request, response);
