@@ -40,7 +40,7 @@
 
 ## 🧱 프로젝트 구조
 
-<img width="403" height="873" alt="Image" src="https://github.com/user-attachments/assets/7d2fe863-ad76-4d38-835d-cfa91121c989" />
+<img width="389" height="545" alt="Image" src="https://github.com/user-attachments/assets/a5900dfc-de14-4d0f-91ba-a2cf11574b21" />
 
 <br>
 
@@ -52,8 +52,7 @@
 └── SearchController.java   // title/author/category별 도서 데이터 필터링
 
 📁 model
-├── BookDAO.java            // 도서 select 쿼리
-└── RegisterDAO.java        // 전달받은 book 객체 저장 쿼리
+└── BookDAO.java            // 도서 select 쿼리
 
 📁 model.entity
 └── Book.java               // Book entity
@@ -98,39 +97,10 @@
 - Lambda(람다식)은 함수형 인터페이스를 간단히 표현할 수 있게 도와주는 자바 8 이상의 기능.
 ```
         Map<String, Function<String, List<Books>>> searchMap = new HashMap<>();
-        
-//        searchMap.put("title", dao::findTitle);
-//        searchMap.put("author", dao::findAuthor);
-//        searchMap.put("category", dao::findCategory);
-        
-        searchMap.put("title", t -> {
-			try {
-				return dao.findTitle(t);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		});
-        searchMap.put("author", t -> {
-			try {
-				return dao.findAuthor(t);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		});
-        searchMap.put("category", t -> {
-			try {
-				return dao.findCategory(t);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		});
 
-        List<Books> filteredList = searchMap
-                .getOrDefault(category, k -> dao.findAll())
-                .apply(query);
+        searchMap.put("title", wrap(model::findTitle, response));
+	searchMap.put("author", wrap(model::findAuthor, response));
+	searchMap.put("category", wrap(model::findCategory, response));
 
 ```
 ---
