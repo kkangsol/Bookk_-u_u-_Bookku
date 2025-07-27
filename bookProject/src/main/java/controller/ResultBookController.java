@@ -16,14 +16,14 @@ import model.entity.Books;
 @WebServlet("/resultList")
 public class ResultBookController extends HttpServlet {
 	
+    private static final BookDAO model = BookDAO.getModel();  
+	
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        BookDAO dao = new BookDAO();
         List<Books> bookList = null;
         
 		try {
-			bookList = dao.findTitle(request.getParameter("title"));
+			bookList =  model.findTitle(request.getParameter("title"));
 		} catch (SQLException e) {
 			response.sendRedirect("/failview.jsp");   
 			return;

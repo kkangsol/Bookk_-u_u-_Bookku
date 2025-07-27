@@ -16,53 +16,54 @@ import model.entity.Books;
 
 @WebServlet("/bookSearch")
 public class SearchVarController extends HttpServlet {
+
+	private static final BookDAO model = BookDAO.getModel();
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+
+		String category = request.getParameter("category");
+		String query = request.getParameter("query");
+
+		Map<String, Function<String, List<Books>>> searchMap = new HashMap<>();
+
+		searchMap.put("title", wrap(model::findTitle, response));
+		searchMap.put("author", wrap(model::findAuthor, response));
+		searchMap.put("category", wrap(model::findCategory, response));
+
+		Function<String, List<Books>> searchFunction = searchMap.getOrDefault(category, wrap(t -> model.findAll(), response));
+		List<Books> filteredList = searchFunction.apply(query);
+
+		request.setAttribute("bookSearch", filteredList);
+		request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);
+	}
 	
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	
+	
+	
 
-        String category = request.getParameter("category");
-        String query = request.getParameter("query");
+	// 내부 함수형 인터페이스 정의 (SQLException 허용)
+	@FunctionalInterface
+	private interface SqlFunction<T, R> {
+		R apply(T t) throws SQLException;
+	}
 
-        BookDAO dao = new BookDAO();
-
-        // 메서드가 예외를 던지지 않는다고 가정하고 간결한 람다만 사용
-        Map<String, Function<String, List<Books>>> searchMap = new HashMap<>();
-        
-//        searchMap.put("title", dao::findTitle);
-//        searchMap.put("author", dao::findAuthor);
-//        searchMap.put("category", dao::findCategory);
-        
-        searchMap.put("title", t -> {
+	// 예외 감싸는 래퍼 함수 (람다 → 안전한 Function)
+	private Function<String, List<Books>> wrap(SqlFunction<String, List<Books>> fn, HttpServletResponse response) {
+		return t -> {
 			try {
-				return dao.findTitle(t);   //데이터  or 예외
+				return fn.apply(t);
 			} catch (SQLException e) {
-				response.sendRedirect("/failview.jsp");   
+				try {
+					response.sendRedirect("/failview.jsp");
+				} catch (IOException io) {
+					throw new RuntimeException(io); // sendRedirect 실패 시 강제 종료
+				}
+				return Collections.emptyList(); // null 대신 안전한 기본값
 			}
-			return null;
-		});
-        
-        searchMap.put("author", t -> {
-			try {
-				return dao.findAuthor(t);
-			} catch (SQLException e) {
-				response.sendRedirect("/failview.jsp");   
-			}
-			return null;
-		});
-        
-        searchMap.put("category", t -> {
-			try {
-				return dao.findCategory(t);
-			} catch (SQLException e) {
-				response.sendRedirect("/failview.jsp");   
-			}
-			return null;
-		});
-
-        List<Books> filteredList = searchMap
-                .getOrDefault(category, k -> dao.findAll())
-                .apply(query);
-
-        request.setAttribute("bookSearch", filteredList);
-        request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);
-    }
+		};
+	}
 }

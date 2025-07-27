@@ -3,13 +3,13 @@ package util;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.junit.Test;
 
 public class DBUtil {
-	
+
 	private static EntityManagerFactory emf;
-	
+
 	static {
+		// persistence.xml에서 정의한 "dbinfo"라는 persistence-unit을 이용해 팩토리 생성
 		emf = Persistence.createEntityManagerFactory("dbinfo");
 	}
 
@@ -18,14 +18,9 @@ public class DBUtil {
 	}
 
 	public static void close() {
-		if (emf != null) {
+		if (emf != null) { 
 			emf.close();
 			emf = null;
 		}
-	}
-
-	@Test
-	public void test() {
-		System.out.println(getEntityManager());
 	}
 }
